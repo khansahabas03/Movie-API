@@ -8,14 +8,13 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div className="container mt-4">
-        <Routes>
-          <Route path="/" element={<MoviesList />} />
-          <Route path="/movies/:id" element={<MovieDetails />} />
-          <Route path="/add-movie" element={<MovieForm />} />
-          <Route path="/edit-movie/:id" element={<MovieForm />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<MoviesList />} />
+        <Route path="/movies/:id" element={<MovieDetails />} />
+        <Route path="/add-movie" element={<MovieForm />} />
+        <Route path="/edit-movie/:id" element={<MovieForm />} />
+      </Routes>
+
     </Router>
   );
 }

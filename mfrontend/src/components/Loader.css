@@ -1,0 +1,80 @@
+/* ===== Loader (Full Screen Overlay Above Navbar) ===== */
+.cinema-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, #111 0%, #000 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 99999; /* ABOVE navbar (z-index 1030) */
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.loader-content {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spinner-border {
+  width: 4rem !important;
+  height: 4rem !important;
+  color: #e50914 !important; /* Netflix red */
+  margin-bottom: 1rem;
+}
+
+.loader-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  color: #fff;
+}
+
+.loader-text {
+  font-size: 1.1rem;
+  color: #bbb;
+  margin: 0;
+}
+
+/* Smooth fade */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(1.02); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== Error Screen (Below Navbar) ===== */
+.fullscreen-error {
+  position: fixed;
+  top: 56px; /* below navbar */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 56px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1030;
+  color: #fff;
+}
+
+.error-box {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+.error-box h4 {
+  color: #dc3545;
+  margin: 0;
+}
