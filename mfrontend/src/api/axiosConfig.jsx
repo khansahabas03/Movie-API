@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080', // ✅ cleaner
+    baseURL: 'https://movie-api-backend-55x5.onrender.com/api/v1/movies', // ✅ cleaner
     headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"

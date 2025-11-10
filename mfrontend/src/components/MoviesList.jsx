@@ -1,51 +1,74 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import api from "../api/axiosConfig";
 
 function MoviesList() {
     const [movies, setMovies] = useState([]);
-    const [search, setSearch] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-    const getMovies = async () => {
+    const fetchMovies = async () => {
         try {
             const response = await api.get("/api/v1/movies");
             setMovies(response.data);
         } catch (err) {
             console.error(err);
+            setError("Failed to fetch movies. Please try again.");
+        } finally {
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        getMovies();
+        fetchMovies();
     }, []);
 
-    const filtered = movies.filter(movie =>
-        movie.title.toLowerCase().includes(search.toLowerCase())
-    );
+    if (loading) {
+        return (
+            <div className="d-flex justify-content-center mt-5">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="alert alert-danger text-center mt-4" role="alert">
+                {error}
+            </div>
+        );
+    }
+
+    if (movies.length === 0) {
+        return (
+            <div className="text-center mt-4">
+                <h4>No movies found 🎬</h4>
+                <p>Add your first movie to get started.</p>
+            </div>
+        );
+    }
 
     return (
-        <div>
-            <h2>Movies</h2>
-            <div className="mb-3">
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search by title..."
-                    onChange={(e) => setSearch(e.target.value)}
-                />
-            </div>
-            <Link to="/add-movie" className="btn btn-success mb-3">Add Movie</Link>
-            {filtered.map((movie) => (
-                <div className="card mb-2" key={movie.id}>
-                    <div className="card-body">
-                        <h5 className="card-title">{movie.title}</h5>
-                        <p className="card-text">Released: {movie.releaseDate}</p>
-                        <Link to={`/movies/${movie.imdbId}`} className="btn btn-primary me-2">Details</Link>
-                        <Link to={`/edit-movie/${movie.imdbId}`} className="btn btn-warning">Edit</Link>
+        <div className="container mt-4">
+            <h2 className="text-center mb-4">Movies List 🎥</h2>
 
+            <div className="row">
+                {movies.map((movie) => (
+                    <div key={movie.imdbId} className="col-md-4 mb-3">
+                        <div className="card shadow-sm">
+                            <img src={movie.poster} className="card-img-top" alt={movie.title} />
+                            <div className="card-body">
+                                <h5 className="card-title">{movie.title}</h5>
+                                <p className="card-text">{movie.releaseDate}</p>
+                                <a href={`/movies/${movie.imdbId}`} className="btn btn-primary w-100">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 }
