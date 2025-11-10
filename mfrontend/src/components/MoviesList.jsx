@@ -26,16 +26,16 @@ function MoviesList() {
         return (
             <div
                 style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100vh",
-                    width: "100%",
                     position: "fixed",
                     top: 0,
                     left: 0,
+                    width: "100vw",
+                    height: "100vh",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                     backgroundColor: "rgba(255, 255, 255, 0.85)",
-                    zIndex: 2000, // increase this so it's above navbar
+                    zIndex: 5000, // higher than navbar
                 }}
             >
                 <div className="spinner-border text-primary" role="status" style={{ width: "4rem", height: "4rem" }}>
@@ -44,6 +44,7 @@ function MoviesList() {
             </div>
         );
     }
+
 
 
     if (error) {
