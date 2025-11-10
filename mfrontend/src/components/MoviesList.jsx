@@ -29,13 +29,13 @@ function MoviesList() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    height: "100vh", // full viewport height
+                    height: "100vh",
                     width: "100%",
-                    position: "fixed", // stay above all
+                    position: "fixed",
                     top: 0,
                     left: 0,
-                    backgroundColor: "rgba(255, 255, 255, 0.8)", // subtle overlay
-                    zIndex: 1050, // ensures it appears above navbar
+                    backgroundColor: "rgba(255, 255, 255, 0.85)",
+                    zIndex: 2000, // increase this so it's above navbar
                 }}
             >
                 <div className="spinner-border text-primary" role="status" style={{ width: "4rem", height: "4rem" }}>
@@ -64,7 +64,7 @@ function MoviesList() {
     }
 
     return (
-        <div className="container mt-4">
+        <div className="container mt-5 pt-5">
             <h2 className="text-center mb-4">Movies List 🎥</h2>
 
             <div className="row">
