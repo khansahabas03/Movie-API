@@ -24,13 +24,27 @@ function MoviesList() {
 
     if (loading) {
         return (
-            <div className="d-flex justify-content-center mt-5">
-                <div className="spinner-border text-primary" role="status">
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh", // full viewport height
+                    width: "100%",
+                    position: "fixed", // stay above all
+                    top: 0,
+                    left: 0,
+                    backgroundColor: "rgba(255, 255, 255, 0.8)", // subtle overlay
+                    zIndex: 1050, // ensures it appears above navbar
+                }}
+            >
+                <div className="spinner-border text-primary" role="status" style={{ width: "4rem", height: "4rem" }}>
                     <span className="visually-hidden">Loading...</span>
                 </div>
             </div>
         );
     }
+
 
     if (error) {
         return (
